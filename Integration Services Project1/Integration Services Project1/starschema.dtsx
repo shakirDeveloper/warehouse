@@ -1,0 +1,70 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/3/2020 2:23:42 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DOTNETLOVER"
+  DTS:CreatorName="DOTNETLOVER\MyFirstLaptop"
+  DTS:DTSID="{89C7185F-C0D2-4049-9ED3-2AB439030E62}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.132"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{F6472FB3-CA65-445F-B292-373187AD53A4}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DOTNETLOVER.master]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{B7E1E653-8882-4645-8EC7-FECEA23AA3E4}"
+      DTS:ObjectName="DOTNETLOVER.master">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DOTNETLOVER;Initial Catalog=master;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\create star schema"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="create star schema"
+      DTS:DTSID="{ACCFA223-7479-4B9E-A80D-140B7994E130}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="create star schema"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B7E1E653-8882-4645-8EC7-FECEA23AA3E4}"
+          SQLTask:SqlStatementSource="CREATE DATABASE Sunrise_SalesDW&#xA;GO&#xA;USE Sunrise_SalesDW;&#xA;GO&#xA;CREATE TABLE Product_Dim&#xA;( ProductKey INT NOT NULL IDENTITY,&#xA;ProductID VARCHAR(5),&#xA;ProductName VARCHAR(100),&#xA;ProductPrice int,&#xA;ProductVendorName VARCHAR(100),&#xA;ProductCategoryName VARCHAR(50),&#xA;PRIMARY KEY (ProductKey));&#xA;GO&#xA;CREATE TABLE Customer_Dim&#xA;(CustomerKey INT NOT NUll IDENTITY,&#xA;CustomerID&#x9;VARCHAR(10),&#xA;CustomerName CHAR(50),&#xA;CustomerZip int,&#xA;CustomerGender VARCHAR(20),&#xA;CustomerMaritalStatus VARCHAR(20),&#xA;CustomereducationLevel VARCHAR(20),&#xA;CustomerCreditScore INT,&#xA;PRIMARY KEY (CustomerKey));&#xA;GO&#xA;CREATE TABLE Calendar_Dim&#xA;(&#xA;CalendarKey INT NOT NULL IDENTITY,&#xA;FullDate DATE,&#xA;DayofWeek_ CHAR(15),&#xA;DayType CHAR(20),&#xA;DayofMonth_ INT,&#xA;Month_&#x9;CHAR(10),&#xA;Quarter_ CHAR(2),&#xA;Year_ INT,&#xA;PRIMARY KEY (CalendarKey));&#xA;GO&#xA;&#xA;CREATE TABLE Store_Dim&#xA;(StoreKey INT NOT NULL IDENTITY,&#xA;StoreId CHAR(2),&#xA;StoreZip INT,&#xA;StoreRegionName VARCHAR(50),&#xA;StoreSize INT,&#xA;StoreCSystem VARCHAR(100),&#xA;StoreLayout VARCHAR(50)&#xA;PRIMARY KEY (StoreKey));&#xA;GO&#xA;CREATE TABLE Sales_Fact&#xA;(&#xA;CalendarKey INT,&#xA;StoreKey INT,&#xA;ProductKey INT,&#xA;CustomerKey INT,&#xA;TID VARCHAR(10),&#xA;DollarsSold INT,&#xA;UnitsSold INT,&#xA;PRIMARY KEY(ProductKey, TID),&#xA;FOREIGN KEY (Calendarkey) REFERENCES Calendar_Dim (CalendarKey),&#xA;FOREIGN KEY (StoreKey) REFERENCES Store_Dim (StoreKey),&#xA;FOREIGN KEY (Productkey) REFERENCES Product_Dim (ProductKey),&#xA;FOREIGN KEY (CustomerKey) REFERENCES Customer_Dim(CustomerKey)&#xA;);&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="172,42"
+          Id="Package\create star schema"
+          TopLeft="357,145" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
